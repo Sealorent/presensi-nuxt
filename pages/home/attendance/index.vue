@@ -1,15 +1,13 @@
-    <template>
-        <div class="w-full relative h-full">
-            <MapboxMap
-                map-id="{ID}"
-                :options="options"
-                class="absolute w-full h-full mapbox-container"
-            />
-            
-        </div>
-    </template>
-
-    
+<template>
+    <div class="w-full relative h-full">
+        <MapboxMap
+            map-id="{ID}"
+            :options="options"
+            class="absolute w-full h-full mapbox-container"
+        />
+        
+    </div>
+</template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
@@ -41,7 +39,7 @@ const setLocation = (latitude: number, longitude: number) => {
 };
 
 // Success callback for geolocation
-const success = (position) => {
+const success = (position : any) => {
     const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
     setLocation(latitude, longitude);
@@ -51,7 +49,7 @@ const success = (position) => {
 
 
 // Error callback for geolocation
-const error = (err) => {
+const error = (err : any) => {
     console.error(`ERROR(${err.code}): ${err.message}`);
 };
 
