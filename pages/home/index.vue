@@ -48,6 +48,7 @@
                                 <tr>
                                     <td class="text-center">
                                         <button 
+                                            @click="attendanceAction"
                                             class="btn text-white" 
                                             :class="disabledAttendance ? 'bg-red-500 disabled' : 'bg-primary'" 
                                             :disabled="disabledAttendance"
@@ -56,7 +57,8 @@
                                         </button>
                                     </td>
                                     <td class="text-center">
-                                        <button 
+                                        <button
+                                            @click="goHomeAction" 
                                             class="btn text-white"
                                             :class="disabledGoHome ? 'bg-red-500 disabled' : 'bg-primary'" 
                                             :disabled="disabledGoHome "
@@ -77,7 +79,6 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue';
-
 const config = useRuntimeConfig()
 useHead({
     title: 'Home Presensi Pegawai Indoweb.id',
@@ -88,27 +89,32 @@ useHead({
     ]
 });
 
-
 const userId = useAuthStore().userId();
 const user : DataUserResponse = useAuthStore().dataUser() || {} as DataUserResponse; 
-console.log('user', user);
 const imageUser = user.photo || '/assets/dummy-profile.png';
 const attendance = user.jam_datang || '--:--:--';
 const goHome = user.jam_pulang || '--:--:--';
 const disabledAttendance = user.jam_datang != '' ? true : false;
 const disabledGoHome = user.jam_pulang != '' ? true : false;
-console.log('disabledAttendance', disabledAttendance);
-console.log('disabledGoHome', disabledGoHome)
 const today = new Date();
 const greeting = greetingUtils();
+
 const date = new Intl.DateTimeFormat('id-ID', {
   weekday: 'long',
   day: 'numeric',
   month: 'long',
   year: 'numeric'
 }).format(today);
+
 const time = ref('--:--:--');
 
+const goHomeAction = () => {
+    navigateTo('/home/attendance');
+}
+
+const attendanceAction = () => {
+    navigateTo('/home/attendance');
+}
 
 onMounted(() => {
     useAuthStore().fetchUserData(userId);

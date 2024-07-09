@@ -11,7 +11,6 @@ const axiosInstance = axios.create({
 // Axios request interceptor to add token to headers
 axiosInstance.interceptors.request.use((config) => {
   const token = useAuthStore().getTokens() // Get token from store
-  console.log(token)
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }

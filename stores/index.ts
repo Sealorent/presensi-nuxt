@@ -58,7 +58,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const fetchUserData = async (userId: number) => {
-    console.log('fetchUserData', userId)
 
     const response = await get('/data_user.php', { id_pegawai: userId });
     if (response.status === 200 && response.data.is_correct) {

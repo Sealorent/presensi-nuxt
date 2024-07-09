@@ -33,8 +33,12 @@ export default defineNuxtConfig({
      "@pinia/nuxt", 
      "@nuxt/image",
     "@pinia-plugin-persistedstate/nuxt",
-    "@vesp/nuxt-fontawesome"
+    "@vesp/nuxt-fontawesome",
+    "nuxt-mapbox",
   ],
+  mapbox: {
+    accessToken: 'pk.eyJ1Ijoic2VhbG9yZW50IiwiYSI6ImNrejlzb2pldTF4amkyb28yMm84NDZmcjEifQ.rUUuGYxWEaFL6lDNl5i8zA'
+  },
   fontawesome: {
     icons: {
       solid: ['dollar-sign', 'cog', 'circle', 'check', 'calendar'],
