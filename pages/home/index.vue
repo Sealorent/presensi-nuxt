@@ -89,7 +89,7 @@ useHead({
     ]
 });
 
-const userId = useAuthStore().userId();
+const userId: number = useAuthStore().userId()!;
 const user : DataUserResponse = useAuthStore().dataUser() || {} as DataUserResponse; 
 const imageUser = user.photo || '/assets/dummy-profile.png';
 const attendance = user.jam_datang || '--:--:--';
