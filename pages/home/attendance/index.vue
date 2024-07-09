@@ -8,8 +8,11 @@
         />
 
         <div class="absolute top-0 left-0 right-0 bg-white p-4">
-            <p class="text-center text-lg font-semibold">Lokasi Pegawai Indoweb.id</p>
-            <p>{{ options }}</p>
+            <AppDropDown
+                class="w-full"
+                :options="optionsLocationAttendance"
+                defaultOption="Pilih Lokasi"
+            />
         </div>
     </div>
 </template>
@@ -17,6 +20,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useState } from '#app';
+import AppDropDown from '~/components/AppDropDown.vue';
+import { type OptionInterface } from '~/commons/interface/option-interface';
 useHead({
     title: 'Lokasi Pegawai Indoweb.id',
     link: [
@@ -30,14 +35,20 @@ useHead({
 let ID = 'mapbox://styles/mapbox/light-v11';
 const user: DataUserResponse = useAuthStore().dataUser() || {} as DataUserResponse;
 let loadMap = useState('loadMap', () => false);
-
+let optionsLocationAttendance = useState<OptionInterface[]>('optionsLocationAttendance', () => []);
+console.log('user', user);
+user.area.forEach((area: any) => {
+    optionsLocationAttendance.value.push({
+        value: [area.latitude, area.longitude].toString(),
+        label: area.lokasi
+    });
+});
 // Define the initial map options using useState
 let options = useState('mapOptions', () => ({
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
     center: [0, 0], // starting position [lng, lat]
     zoom: 10 // starting zoom
 }));
-
 
 // Function to set the location
 const setLocation = (latitude: number, longitude: number) => {
