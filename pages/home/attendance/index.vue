@@ -49,6 +49,7 @@ const success = (position) => {
 
 
 
+
 // Error callback for geolocation
 const error = (err) => {
     console.error(`ERROR(${err.code}): ${err.message}`);
